@@ -120,6 +120,11 @@ generateTitleLinks();
 // new
 
 function generateTags(){
+
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   console.log(articles)
@@ -159,7 +164,22 @@ function generateTags(){
 
       html = html + newlinkHTML;
 
-      /* END LOOP: for each tag */
+  /* [NEW] check if this link is NOT already in allTags */
+
+    if(!allTags.hasOwnProperty(tag)){               /// sprawdzic czy new link
+
+    /* [NEW]add tag to allTags object*/
+
+      allTags[tag] = 1;     
+
+    } else {
+
+      allTags[tag]++
+
+    }
+
+    /* END LOOP: for each tag */
+    
     }
 
     /* insert HTML of all the links into the tags wrapper */
@@ -167,6 +187,13 @@ function generateTags(){
 
     /* END LOOP: for every article: */
   }
+
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  /* [NEW] add html from allTags to tagList */
+  // tagList.innerHTML = allTags.join(' ');
+  console.log(allTags)                /////// NAJNOWSZE
 
 }
 
@@ -338,6 +365,12 @@ function addClickListenersToAuthors() {
 
 }
 
+
+
+/// NEW
+
+
+const optTagsListSelector = '.tags.list'
 
 
 

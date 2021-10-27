@@ -186,6 +186,8 @@ function generateTags(){
     tagWrapper.innerHTML = html;
 
     /* END LOOP: for every article: */
+
+    console.log(allTags)     //// najnowsze
   }
 
   /* [NEW] find list of tags in right column */
@@ -193,9 +195,10 @@ function generateTags(){
 
   /* [NEW] add html from allTags to tagList */
   // tagList.innerHTML = allTags.join(' ');
-  console.log(allTags)                /////// NAJNOWSZE
+  // console.log(allTags)                /////// NAJNOWSZE
 
 }
+
 
 generateTags();
 

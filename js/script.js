@@ -155,9 +155,28 @@ function calculateTagsParams(tags) {
 }
 
 
+const optTagsListSelector = '.tags.list';
+
+const optCloudClassCount  = 5;
+const optCloudClassPrefix  = 'tag-size-'
+
+
 function calculateTagClass(count, params) {
 
+  const normalizedCount = count - params.min;
+
+  const normalizedMax = params.max - params.min;
+
+  const percentage = normalizedCount / normalizedMax;
+
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+
+  return optCloudClassPrefix + classNumber
+
+
 }
+
+
 
 
 function generateTags(){
@@ -251,10 +270,15 @@ function generateTags(){
 
     /* generate code of a link and add it to allTagsHTML */
 
-    const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>'
+    // const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>' // poprawic
+   
+
+    const tagLinkHTML = '<li>' + '<a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ')' +  'class="' + calculateTagClass(allTags[tag], tagsParams) + '"' + '</a></li>'
+
     console.log('taglinkHTML', tagLinkHTML);
 
-    allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ') </a></li>'; // poprawic
+ 
+    allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ') </a></li>'; // poprawic to usunac? // 
 
     // allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ')' + ' class="" </a></li>';
 
@@ -445,10 +469,7 @@ addClickListenersToAuthors()
 /// NEW
 
 
-const optTagsListSelector = '.tags.list';
 
-const optCloudClassCount  = 5;
-const optCloudClassPrefix  = 'tag-size-'
 
 
 

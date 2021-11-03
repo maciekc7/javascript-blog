@@ -119,6 +119,47 @@ generateTitleLinks();
 
 // new
 
+
+// const params = {
+//   min: 2,
+//   max: 7
+// }
+// console.log(params)
+
+
+function calculateTagsParams(tags) {
+
+
+  const params = {
+    min: 999999,
+    max: 0
+  }
+
+  for(let tag in tags){
+
+    console.log(tag + ' is used ' + tags[tag] + ' times');
+
+    if(tags[tag] > params.max){
+      params.max = tags[tag];
+    }
+
+    if(tags[tag] < params.min){
+      params.min = tags[tag];
+    }
+
+
+  }
+
+
+  return params;
+}
+
+
+function calculateTagClass(count, params) {
+
+}
+
+
 function generateTags(){
 
   /* [NEW] create a new variable allTags with an empty object */
@@ -199,6 +240,9 @@ function generateTags(){
 
   /* create variable for all links HTML code */
 
+  const tagsParams = calculateTagsParams(allTags)
+  console.log('tagsParams', tagsParams)
+
   let allTagsHTML = ''
 
   /* start loop : for each tag in allTags */
@@ -206,9 +250,18 @@ function generateTags(){
   for(let tag in allTags) {
 
     /* generate code of a link and add it to allTagsHTML */
-    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+
+    const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>'
+    console.log('taglinkHTML', tagLinkHTML);
+
+    allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ') </a></li>'; // poprawic
+
+    // allTagsHTML += '<li><a href="#tag-' + tag + '">'+ tag +  '(' + allTags[tag] + ')' + ' class="" </a></li>';
+
+    allTagsHTML += tagLinkHTML 
 
     /* end loop for each tag in alltags */
+    
   }
 
   /* add html from alltagsHTML to taglist */
@@ -374,7 +427,7 @@ function addClickListenersToAuthors() {
   /* START LOOP: for each link */
   for(let link of allLinks) {
 
-  console.log()
+  console.log(link)
 
     /* add tagClickHandler as event listener for that link */
 
@@ -386,14 +439,16 @@ function addClickListenersToAuthors() {
 
 }
 
+addClickListenersToAuthors()
 
 
 /// NEW
 
 
-const optTagsListSelector = '.tags.list'
+const optTagsListSelector = '.tags.list';
 
-
+const optCloudClassCount  = 5;
+const optCloudClassPrefix  = 'tag-size-'
 
 
 
